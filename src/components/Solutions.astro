@@ -1,0 +1,61 @@
+---
+import HaldenImage from "./HaldenImage.astro";
+import BadgePill from "./BadgePill.astro";
+
+const items = [
+  {
+    title: "Daily wear",
+    line: "Gold-fill bonded thick enough for showers and winter.",
+  },
+  {
+    title: "Sensitive skin",
+    line: "No nickel, no plating, no brass underneath.",
+  },
+  {
+    title: "Layering",
+    line: "Two chains at different lengths, one warm and one dark.",
+  },
+  {
+    title: "Resizing",
+    line: "Free within 60 days, any length, no questions.",
+  },
+];
+---
+
+<section id="solutions" class="bg-base-100" aria-labelledby="solutions-heading">
+  <div class="container-halden section-y">
+    <div class="section-header section-header--center scroll-reveal">
+      <BadgePill label="At the bench" />
+      <h2 id="solutions-heading" class="text-headline-sm">
+        Your necklace, naturally refined
+      </h2>
+      <p class="text-subhead text-subhead--muted section-header__subhead">
+        Whether you want something thin enough to forget or heavy enough to feel,
+        each piece is forged, soldered, and finished by hand in Toronto.
+      </p>
+    </div>
+
+    <div class="solutions-layout scroll-reveal">
+      <div class="solutions-layout__media">
+        <HaldenImage
+          base="/images/display"
+          alt="Gold-fill necklaces arranged on a warm studio surface."
+          width={1200}
+          height={1400}
+          cover
+          comment="Display: necklaces on warm studio surface"
+        />
+      </div>
+      <div class="solutions-grid" data-reveal-group>
+        {
+          items.map((item) => (
+            <article class="scroll-reveal solutions-card">
+              <h3 class="solutions-card__title">{item.title}</h3>
+              <p class="solutions-card__line">{item.line}</p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</section>

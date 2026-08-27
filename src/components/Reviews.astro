@@ -1,5 +1,5 @@
 ---
-const columnA = [
+const reviews = [
   {
     quote:
       "The Lakeshore chain is so thin I forget I'm wearing it until someone asks.",
@@ -26,9 +26,6 @@ const columnA = [
     quote: "Leeward layers beautifully. Warm and dark chains stay separate.",
     name: "Alex Turner",
   },
-];
-
-const columnB = [
   {
     quote: "First piece of handmade jewellery I've kept for years.",
     name: "Mia Collins",
@@ -59,45 +56,27 @@ const columnB = [
 <section id="reviews" class="reviews-section" aria-labelledby="reviews-heading">
   <div class="container-halden section-y">
     <div class="reviews-section__header scroll-reveal">
-      <h2 id="reviews-heading" class="text-headline-sm">
-        Customer review
-      </h2>
+      <h2 id="reviews-heading" class="text-headline-sm">Customer Review</h2>
       <p class="text-subhead text-subhead--muted reviews-section__subhead">
         Here's what some of our customers say about their experience.
       </p>
     </div>
 
-    <div class="reviews-columns" aria-label="Customer reviews">
-      <div class="reviews-column reviews-column--up">
-        <div class="reviews-column__track">
-          {
-            [...columnA, ...columnA].map((review) => (
-              <figure class="review-card">
-                <span class="review-card__mark" aria-hidden="true">“</span>
-                <blockquote class="review-card__quote">
-                  <p>{review.quote}</p>
-                </blockquote>
-                <figcaption class="review-card__name">{review.name}</figcaption>
-              </figure>
-            ))
-          }
-        </div>
-      </div>
-
-      <div class="reviews-column reviews-column--down">
-        <div class="reviews-column__track">
-          {
-            [...columnB, ...columnB].map((review) => (
-              <figure class="review-card">
-                <span class="review-card__mark" aria-hidden="true">“</span>
-                <blockquote class="review-card__quote">
-                  <p>{review.quote}</p>
-                </blockquote>
-                <figcaption class="review-card__name">{review.name}</figcaption>
-              </figure>
-            ))
-          }
-        </div>
+    <div class="reviews-marquee" aria-label="Customer reviews">
+      <div class="reviews-marquee__fade reviews-marquee__fade--left" aria-hidden="true"></div>
+      <div class="reviews-marquee__fade reviews-marquee__fade--right" aria-hidden="true"></div>
+      <div class="reviews-marquee__track">
+        {
+          [...reviews, ...reviews].map((review) => (
+            <figure class="review-card review-card--horizontal">
+              <span class="review-card__mark" aria-hidden="true">“</span>
+              <blockquote class="review-card__quote">
+                <p>{review.quote}</p>
+              </blockquote>
+              <figcaption class="review-card__name">{review.name}</figcaption>
+            </figure>
+          ))
+        }
       </div>
     </div>
   </div>

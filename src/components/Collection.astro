@@ -60,45 +60,52 @@ const products = [
 ];
 ---
 
-<section id="collection" class="collection-overlap" aria-labelledby="collection-heading">
-  <div class="collection-overlap__panel">
-    <div class="container-halden section-y collection-overlap__inner">
-      <div class="section-header section-header--center scroll-reveal">
+<section id="collection" class="collection-section" aria-labelledby="collection-heading">
+  <div class="container-halden section-y">
+    <div class="collection-section__header scroll-reveal">
+      <div class="section-header">
         <BadgePill label="The collection" />
         <h2 id="collection-heading" class="text-headline-sm">
-          Six pieces. That's the whole line.
+          Necklaces you'll love
         </h2>
         <p class="text-subhead text-subhead--muted section-header__subhead">
-          Each one is made after you order it, which is why there are six and not
-          sixty.
+          Six pieces in recycled gold-fill and oxidised sterling. Each one made
+          after you order it.
         </p>
       </div>
-      <div class="section-content collection-scroll" data-reveal-group>
-        {
-          products.map((product) => (
-            <a
-              href="#collection"
-              class="scroll-reveal product-card product-card--interactive"
-            >
+      <a href="#collection" class="btn btn-primary btn--arrow btn-link collection-section__cta">
+        <span>View more</span>
+        <span class="btn__icon" aria-hidden="true">↗</span>
+      </a>
+    </div>
+
+    <div class="collection-grid" data-reveal-group>
+      {
+        products.map((product) => (
+          <a
+            href="#collection"
+            class="scroll-reveal product-card product-card--interactive product-card--grid"
+          >
+            <div class="product-card__image">
               <HaldenImage
                 base={`/images/${product.slug}`}
                 alt={product.alt}
                 width={800}
                 height={1000}
+                cover
                 comment={product.comment}
               />
-              <div class="product-card__meta">
-                <p class="text-material-line">{product.material}</p>
-                <div class="product-card__title-row">
-                  <span class="product-card__name">{product.name}</span>
-                  <span class="product-card__price">{product.price}</span>
-                </div>
-                <p class="product-card__description max-w-none">{product.description}</p>
+              <span class="product-card__category">{product.material}</span>
+            </div>
+            <div class="product-card__meta product-card__meta--overlay">
+              <div class="product-card__title-row">
+                <span class="product-card__name">{product.name}</span>
+                <span class="product-card__price">{product.price}</span>
               </div>
-            </a>
-          ))
-        }
-      </div>
+            </div>
+          </a>
+        ))
+      }
     </div>
   </div>
 </section>

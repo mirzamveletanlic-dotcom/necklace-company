@@ -1,0 +1,37 @@
+---
+import HaldenImage from "./HaldenImage.astro";
+
+const cards = [
+  {
+    slug: "lakeshore",
+    title: "Lakeshore Chain",
+    alt: "A delicate gold-fill chain necklace, the thinnest in the Halden line, photographed flat.",
+    comment: "Lakeshore: on plain warm paper, directly from above",
+  },
+  {
+    slug: "keel",
+    title: "Keel Bar Pendant",
+    alt: "A forged bar pendant in oxidised sterling, left slightly uneven, photographed flat.",
+    comment: "Keel: on plain warm paper, directly from above",
+  },
+];
+---
+
+<div class="hero-highlight" aria-label="Featured pieces">
+  {
+    cards.map((card) => (
+      <a href="#collection" class="hero-highlight__card text-link-plain no-underline">
+        <div class="hero-highlight__media">
+          <HaldenImage
+            base={`/images/${card.slug}`}
+            alt={card.alt}
+            width={600}
+            height={700}
+            comment={card.comment}
+          />
+        </div>
+        <p class="hero-highlight__title">{card.title}</p>
+      </a>
+    ))
+  }
+</div>

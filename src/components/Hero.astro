@@ -1,6 +1,7 @@
 ---
 import HaldenImage from "./HaldenImage.astro";
 import BadgePill from "./BadgePill.astro";
+import HeroHighlight from "./HeroHighlight.astro";
 
 const slides = [
   {
@@ -33,6 +34,13 @@ const slides = [
     alt: "Heavy oval links in gold-fill, soldered closed one at a time, photographed flat.",
     label: "Ballast",
   },
+];
+
+const stats = [
+  { value: "6", label: "Pieces in the line" },
+  { value: "100%", label: "Hand-forged in studio" },
+  { value: "9", label: "Hours per necklace" },
+  { value: "2019", label: "Studio opened" },
 ];
 ---
 
@@ -102,11 +110,28 @@ const slides = [
           <span>Shop the collection</span>
           <span class="btn__icon" aria-hidden="true">↗</span>
         </a>
-        <a href="#process" class="btn btn-secondary btn--arrow btn-link btn--ghost">
-          <span>How they're made</span>
-          <span class="btn__icon" aria-hidden="true">↗</span>
-        </a>
       </div>
     </div>
   </div>
+
+  <div class="hero-stats-fade" aria-hidden="true">
+    <div class="hero-stats-fade__edge hero-stats-fade__edge--left"></div>
+    <div class="hero-stats-fade__edge hero-stats-fade__edge--right"></div>
+    <div class="hero-stats-fade__track">
+      <div class="hero-stats-fade__inner">
+        {
+          [...stats, ...stats].map((stat) => (
+            <div class="hero-stat">
+              <p class="hero-stat__value">{stat.value}</p>
+              <p class="hero-stat__label">{stat.label}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="hero-overlap" aria-hidden="false">
+  <HeroHighlight />
 </section>

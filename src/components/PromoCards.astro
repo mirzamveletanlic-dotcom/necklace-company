@@ -1,0 +1,58 @@
+---
+import HaldenImage from "./HaldenImage.astro";
+
+const cards = [
+  {
+    tone: "light",
+    badge: "Made to order",
+    title: "Wear it until it's yours.",
+    line: "Small-batch chains and pendants, hand-forged in Leslieville after you order.",
+    cta: "Shop the collection",
+    href: "#collection",
+    image: "/images/studio",
+    alt: "Gold-fill necklaces and studio tools on a work surface.",
+    comment: "Studio: work surface with necklaces and tools",
+  },
+  {
+    tone: "dark",
+    badge: "Visit the studio",
+    title: "See it before you buy.",
+    line: "The bench is open by appointment on Thursdays. Email to book a visit.",
+    cta: "Book a visit",
+    href: "mailto:hello@halden.co",
+    image: "/images/materials",
+    alt: "Recycled gold-fill wire and oxidised sterling sheet on a studio bench.",
+    comment: "Materials: wire and sheet on bench",
+  },
+];
+---
+
+<section class="promo-cards" aria-label="Highlights">
+  <div class="container-halden promo-cards__inner">
+    {
+      cards.map((card) => (
+        <article class:list={["promo-card", `promo-card--${card.tone}`, "scroll-reveal"]}>
+          <div class="promo-card__copy">
+            <p class="badge-pill promo-card__badge">{card.badge}</p>
+            <h2 class="promo-card__title">{card.title}</h2>
+            <p class="promo-card__line">{card.line}</p>
+            <a href={card.href} class="btn btn-primary btn--arrow btn-link promo-card__cta">
+              <span>{card.cta}</span>
+              <span class="btn__icon" aria-hidden="true">↗</span>
+            </a>
+          </div>
+          <div class="promo-card__media">
+            <HaldenImage
+              base={card.image}
+              alt={card.alt}
+              width={800}
+              height={600}
+              cover
+              comment={card.comment}
+            />
+          </div>
+        </article>
+      ))
+    }
+  </div>
+</section>

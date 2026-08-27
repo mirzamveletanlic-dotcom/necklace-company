@@ -1,49 +1,22 @@
----
-import HaldenImage from "./HaldenImage.astro";
----
-
-<section id="newsletter" class="newsletter-fullbleed" aria-labelledby="newsletter-heading">
-  <div class="newsletter-fullbleed__media">
-    <HaldenImage
-      base="/images/newsletter"
-      alt="Gold-fill necklaces and studio tools arranged on a work surface."
-      width={2400}
-      height={1400}
-      cover
-      comment="Newsletter: full-bleed background photograph"
-    />
-  </div>
-  <div class="newsletter-fullbleed__overlay" aria-hidden="true"></div>
-  <div class="container-halden newsletter-fullbleed__content">
-    <h2 id="newsletter-heading" class="text-display scroll-reveal">
-      Two emails a year
-    </h2>
-    <p class="text-subhead scroll-reveal">
-      New pieces and studio hours. Nothing else.
-    </p>
-    <form
-      class="scroll-reveal flex max-w-prose flex-col gap-16 md:flex-row md:items-stretch"
-      action="#"
-      method="post"
-    >
-      <div class="flex flex-1 flex-col">
-        <label for="email" class="visually-hidden">EMAIL</label>
+<section id="newsletter" class="newsletter-band" aria-labelledby="newsletter-heading">
+  <div class="container-halden">
+    <div class="newsletter-card scroll-reveal">
+      <h2 id="newsletter-heading" class="newsletter-card__title">
+        Subscribe for studio updates, new pieces &amp; visit hours.
+      </h2>
+      <form class="newsletter-card__form" action="#" method="post">
+        <label for="email" class="visually-hidden">Email address</label>
         <input
           id="email"
           name="email"
           type="email"
           autocomplete="email"
           required
-          class="w-full border border-base-100 bg-base-100 px-16 py-16 text-base-content"
-          style="border-radius: var(--radius-field)"
+          placeholder="name@email.com"
+          class="newsletter-card__input"
         />
-      </div>
-      <input
-        type="submit"
-        value="Sign up"
-        class="newsletter-submit text-label w-full cursor-pointer border border-base-100 bg-transparent px-32 py-16 text-base-100 md:w-auto"
-        style="border-radius: var(--radius-field)"
-      />
-    </form>
+        <input type="submit" value="Subscribe" class="newsletter-card__submit" />
+      </form>
+    </div>
   </div>
 </section>

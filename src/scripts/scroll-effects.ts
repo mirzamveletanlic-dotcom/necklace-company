@@ -134,7 +134,8 @@ function initHeroSlider(reducedMotion: boolean) {
 function initMobileNav() {
   const toggle = document.querySelector("[data-nav-toggle]");
   const nav = document.querySelector("[data-mobile-nav]");
-  if (!toggle || !nav) return;
+  const header = document.querySelector(".site-header");
+  if (!toggle || !nav || !header) return;
 
   const closeTriggers = nav.querySelectorAll("[data-nav-close]");
 
@@ -142,7 +143,7 @@ function initMobileNav() {
     toggle.setAttribute("aria-expanded", String(open));
     toggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
     nav.toggleAttribute("hidden", !open);
-    document.body.classList.toggle("nav-open", open);
+    header.classList.toggle("is-menu-open", open);
   };
 
   toggle.addEventListener("click", () => {
@@ -152,6 +153,10 @@ function initMobileNav() {
 
   closeTriggers.forEach((trigger) => {
     trigger.addEventListener("click", () => setOpen(false));
+  });
+
+  document.addEventListener("click", (event) => {
+    if (!header.contains(event.target as Node)) setOpen(false);
   });
 
   window.addEventListener("keydown", (event) => {
