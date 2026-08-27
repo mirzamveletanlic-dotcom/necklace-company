@@ -1,0 +1,104 @@
+---
+const columnA = [
+  {
+    quote:
+      "The Lakeshore chain is so thin I forget I'm wearing it until someone asks.",
+    name: "Mara Chen",
+  },
+  {
+    quote:
+      "Ordered Keel for my partner. The oxidised bar looks exactly like the photos.",
+    name: "James Okafor",
+  },
+  {
+    quote: "Nora resized my Bight within a week. No charge, no fuss.",
+    name: "Priya Nair",
+  },
+  {
+    quote: "I've worn Ballast every day for eight months. Still looks new.",
+    name: "Theo Walsh",
+  },
+  {
+    quote: "The pearl on Tender sits off-centre exactly as described.",
+    name: "Lin Fraser",
+  },
+  {
+    quote: "Leeward layers beautifully. Warm and dark chains stay separate.",
+    name: "Alex Turner",
+  },
+];
+
+const columnB = [
+  {
+    quote: "First piece of handmade jewellery I've kept for years.",
+    name: "Mia Collins",
+  },
+  {
+    quote: "Studio visit on a Thursday was worth the trip from Hamilton.",
+    name: "Jordan Lee",
+  },
+  {
+    quote: "Gold-fill that actually survives showers and winter.",
+    name: "Sofia Bennett",
+  },
+  {
+    quote: "Packaging was simple and the necklace arrived in nine days.",
+    name: "Ryan Mitchell",
+  },
+  {
+    quote: "Heavier than expected in the best way. You feel the links.",
+    name: "Emma Hayes",
+  },
+  {
+    quote: "Third order now. Same quality every time.",
+    name: "Jamie Lee",
+  },
+];
+---
+
+<section id="reviews" class="reviews-section" aria-labelledby="reviews-heading">
+  <div class="container-halden section-y">
+    <div class="reviews-section__header scroll-reveal">
+      <h2 id="reviews-heading" class="text-headline-sm">
+        Customer review
+      </h2>
+      <p class="text-subhead reviews-section__subhead">
+        Here's what some of our customers say about their experience.
+      </p>
+    </div>
+
+    <div class="reviews-columns" aria-label="Customer reviews">
+      <div class="reviews-column reviews-column--up">
+        <div class="reviews-column__track">
+          {
+            [...columnA, ...columnA].map((review) => (
+              <figure class="review-card">
+                <span class="review-card__mark" aria-hidden="true">“</span>
+                <blockquote class="review-card__quote">
+                  <p>{review.quote}</p>
+                </blockquote>
+                <figcaption class="review-card__name">{review.name}</figcaption>
+              </figure>
+            ))
+          }
+        </div>
+      </div>
+
+      <div class="reviews-column reviews-column--down">
+        <div class="reviews-column__track">
+          {
+            [...columnB, ...columnB].map((review) => (
+              <figure class="review-card">
+                <span class="review-card__mark" aria-hidden="true">“</span>
+                <blockquote class="review-card__quote">
+                  <p>{review.quote}</p>
+                </blockquote>
+                <figcaption class="review-card__name">{review.name}</figcaption>
+              </figure>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

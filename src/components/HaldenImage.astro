@@ -7,7 +7,6 @@ interface Props {
   loading?: "lazy" | "eager";
   fetchpriority?: "high" | "auto";
   comment?: string;
-  flush?: boolean;
   cover?: boolean;
   objectPosition?: string;
 }
@@ -20,16 +19,11 @@ const {
   loading = "lazy",
   fetchpriority,
   comment,
-  flush = false,
   cover = false,
   objectPosition,
 } = Astro.props;
 
-const classes = [
-  "halden-image",
-  cover ? "halden-image--cover" : "",
-  flush ? "halden-image--flush" : "",
-]
+const classes = ["halden-image", cover ? "halden-image--cover" : ""]
   .filter(Boolean)
   .join(" ");
 ---
