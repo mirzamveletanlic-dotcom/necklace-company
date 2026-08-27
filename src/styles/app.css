@@ -42,9 +42,13 @@
   --spacing-64: 64px;
   --spacing-96: 96px;
   --spacing-128: 128px;
+  --spacing-160: 160px;
+  --spacing-192: 192px;
 
-  --font-display: "Fraunces", ui-serif, Georgia, serif;
-  --font-body: "Karla", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Fraunces", Georgia, serif;
+  --font-body: "Karla", system-ui, sans-serif;
+  --font-sans: var(--font-body);
+  --default-font-family: var(--font-body);
 
   --max-width-container: 1200px;
   --max-width-prose: 65ch;
@@ -52,6 +56,7 @@
 
 :root {
   --text-headline: clamp(2rem, 1.464rem + 2.679vw, 2.75rem);
+  --text-headline-sm: clamp(2rem, 1.464rem + 2.679vw, 2.75rem);
   --text-subhead: clamp(1.125rem, 1.021rem + 0.442vw, 1.375rem);
   --text-body: 16px;
   --text-eyebrow: 13px;
@@ -60,7 +65,8 @@
 
 @media (min-width: 768px) {
   :root {
-    --text-headline: clamp(2.75rem, 0.875rem + 3.906vw, 4rem);
+    --text-headline: clamp(2.75rem, -0.25rem + 6.25vw, 5rem);
+    --text-headline-sm: clamp(2.75rem, 0.875rem + 3.906vw, 3.5rem);
   }
 }
 
@@ -76,9 +82,15 @@
     font-weight: 400;
     font-size: var(--text-body);
     line-height: 1.6;
+    font-optical-sizing: auto;
+    font-variant-numeric: oldstyle-nums proportional-nums;
     min-height: 100dvh;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+  }
+
+  p {
+    text-wrap: pretty;
   }
 
   a {
@@ -103,12 +115,33 @@
 }
 
 @layer components {
+  .font-display {
+    font-family: var(--font-display);
+    font-optical-sizing: auto;
+  }
+
+  .tabular-nums {
+    font-variant-numeric: tabular-nums;
+  }
+
   .text-headline {
     font-family: var(--font-display);
     font-weight: 600;
     font-size: var(--text-headline);
     line-height: 1.05;
     letter-spacing: -0.02em;
+    font-optical-sizing: auto;
+    text-wrap: balance;
+  }
+
+  .text-headline-sm {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: var(--text-headline-sm);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    font-optical-sizing: auto;
+    text-wrap: balance;
   }
 
   .text-subhead {
@@ -116,6 +149,7 @@
     font-weight: 400;
     font-size: var(--text-subhead);
     line-height: 1.5;
+    text-wrap: pretty;
   }
 
   .text-body {
@@ -124,6 +158,7 @@
     font-size: var(--text-body);
     line-height: 1.6;
     max-width: var(--max-width-prose);
+    text-wrap: pretty;
   }
 
   .text-eyebrow {
@@ -146,13 +181,17 @@
   }
 
   .section-y {
-    padding-block: var(--spacing-96);
+    padding-block: var(--spacing-128);
   }
 
   @media (width >= 48rem) {
     .section-y {
-      padding-block: var(--spacing-128);
+      padding-block: var(--spacing-192);
     }
+  }
+
+  .section-seam {
+    border-top: 1px solid var(--color-base-300);
   }
 
   .container-halden {
@@ -203,21 +242,6 @@
     box-shadow: 0 2px 12px color-mix(in oklab, var(--color-base-content) 8%, transparent);
   }
 
-  .card-alt {
-    background-color: var(--color-base-100);
-    border: none;
-    padding: var(--spacing-32);
-    border-radius: var(--radius-box);
-    box-shadow: 0 2px 12px color-mix(in oklab, var(--color-base-content) 8%, transparent);
-  }
-
-  .text-display-20 {
-    font-family: var(--font-display);
-    font-weight: 600;
-    font-size: 20px;
-    line-height: 1.2;
-  }
-
   .text-question {
     font-family: var(--font-body);
     font-weight: 600;
@@ -225,12 +249,13 @@
     line-height: 1.6;
   }
 
-  .text-meta {
+  .text-product-description {
     font-family: var(--font-body);
     font-weight: 400;
     font-size: var(--text-label);
     line-height: 1.6;
     color: color-mix(in oklab, var(--color-base-content) 70%, transparent);
+    text-wrap: pretty;
   }
 
   .text-link-plain {
@@ -256,8 +281,11 @@
     border: 0;
   }
 
-  .image-slot {
-    border: 1px solid var(--color-base-300);
+  .halden-image {
+    display: block;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
     border-radius: var(--radius-box);
   }
 
@@ -275,6 +303,63 @@
     .section-content {
       margin-top: var(--spacing-64);
     }
+  }
+
+  .product-title-row {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-16);
+  }
+
+  .product-title-row__name {
+    flex-shrink: 0;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: var(--text-body);
+    font-optical-sizing: auto;
+    line-height: 1.2;
+  }
+
+  .product-title-row__hairline {
+    flex: 1;
+    min-width: var(--spacing-16);
+    height: 1px;
+    background-color: var(--color-base-300);
+  }
+
+  .product-title-row__price {
+    flex-shrink: 0;
+    font-family: var(--font-body);
+    font-weight: 400;
+    font-size: var(--text-body);
+    line-height: 1.2;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .process-number {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: 4rem;
+    line-height: 1;
+    color: var(--color-base-300);
+    font-variant-numeric: tabular-nums;
+    font-optical-sizing: auto;
+  }
+
+  .process-step-name {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: var(--text-body);
+    font-optical-sizing: auto;
+    line-height: 1.2;
+  }
+
+  .wordmark {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: var(--text-body);
+    font-optical-sizing: auto;
+    line-height: 1.2;
   }
 
   .faq-item {

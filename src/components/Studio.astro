@@ -1,17 +1,17 @@
 ---
-import ImageSlot from "./ImageSlot.astro";
+import HaldenImage from "./HaldenImage.astro";
 ---
 
 <section
   id="studio"
-  class="section-y bg-neutral text-neutral-content"
+  class="bg-neutral text-neutral-content"
   aria-labelledby="studio-heading"
 >
-  <div class="container-halden">
+  <div class="container-halden section-seam section-y">
     <div class="grid grid-cols-1 gap-32 md:grid-cols-2 md:items-start">
       <div class="section-header">
         <p class="text-eyebrow">The studio</p>
-        <h2 id="studio-heading" class="text-headline">
+        <h2 id="studio-heading" class="text-headline-sm">
           One person, one bench, since 2019.
         </h2>
         <div class="flex flex-col gap-16">
@@ -26,9 +26,11 @@ import ImageSlot from "./ImageSlot.astro";
           </p>
         </div>
       </div>
-      <ImageSlot
-        ratio="3/2"
-        alt="Bench tools, wire, and hands mid-work in the Leslieville studio"
+      <HaldenImage
+        base="/images/studio"
+        alt="Bench tools, wire, and hands mid-work at a jewellery workbench."
+        width={1500}
+        height={1000}
         comment="Studio: bench tools, wire, hands mid-work"
       />
     </div>

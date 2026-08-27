@@ -15,19 +15,19 @@ const items = [
 ];
 ---
 
-<section id="care" class="section-y bg-base-200" aria-labelledby="care-heading">
-  <div class="container-halden">
+<section id="care" class="bg-base-100" aria-labelledby="care-heading">
+  <div class="container-halden section-seam section-y">
     <div class="section-header">
       <p class="text-eyebrow">After you buy</p>
-      <h2 id="care-heading" class="text-headline">
+      <h2 id="care-heading" class="text-headline-sm">
         Free resizing, lifetime repairs.
       </h2>
     </div>
     <div class="section-content grid grid-cols-1 gap-32 md:grid-cols-3">
       {
         items.map((item) => (
-          <article class="card-alt flex flex-col gap-16">
-            <h3 class="text-display-20">{item.title}</h3>
+          <article class="card flex flex-col gap-16">
+            <h3 class="process-step-name">{item.title}</h3>
             <p class="text-body max-w-none">{item.line}</p>
           </article>
         ))

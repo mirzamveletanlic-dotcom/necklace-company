@@ -1,0 +1,36 @@
+---
+interface Props {
+  base: string;
+  alt: string;
+  width: number;
+  height: number;
+  loading?: "lazy" | "eager";
+  fetchpriority?: "high" | "auto";
+  comment?: string;
+}
+
+const {
+  base,
+  alt,
+  width,
+  height,
+  loading = "lazy",
+  fetchpriority,
+  comment,
+} = Astro.props;
+---
+
+{comment && <Fragment set:html={`<!-- ${comment} -->`} />}
+<picture>
+  <source srcset={`${base}.webp`} type="image/webp" />
+  <img
+    src={`${base}.jpg`}
+    alt={alt}
+    width={width}
+    height={height}
+    loading={loading}
+    decoding="async"
+    fetchpriority={fetchpriority}
+    class="halden-image"
+  />
+</picture>

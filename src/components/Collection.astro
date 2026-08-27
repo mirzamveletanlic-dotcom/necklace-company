@@ -1,57 +1,63 @@
 ---
-import ImageSlot from "./ImageSlot.astro";
+import HaldenImage from "./HaldenImage.astro";
 
 const products = [
   {
+    slug: "bight",
     name: "Bight",
     description: "A single loop of wire, forged flat where it crosses.",
-    meta: "16in, gold-fill, $132",
-    alt: "Bight necklace on plain warm paper, shot directly from above",
+    price: "$132",
+    alt: "A thin gold-fill necklace with a single forged loop pendant, photographed flat.",
     comment: "Bight: on plain warm paper, directly from above",
   },
   {
+    slug: "lakeshore",
     name: "Lakeshore",
     description: "The thinnest chain we make that still takes daily wear.",
-    meta: "16in, gold-fill, $148",
-    alt: "Lakeshore necklace on plain warm paper, shot directly from above",
+    price: "$148",
+    alt: "A delicate gold-fill chain necklace, the thinnest in the Halden line, photographed flat.",
     comment: "Lakeshore: on plain warm paper, directly from above",
   },
   {
+    slug: "keel",
     name: "Keel",
     description: "A forged bar, oxidised dark and left slightly uneven.",
-    meta: "18in, oxidised sterling, $186",
-    alt: "Keel necklace on plain warm paper, shot directly from above",
+    price: "$186",
+    alt: "A forged bar pendant in oxidised sterling, left slightly uneven, photographed flat.",
     comment: "Keel: on plain warm paper, directly from above",
   },
   {
+    slug: "tender",
     name: "Tender",
     description: "One pearl, drilled and set by hand, off-centre on purpose.",
-    meta: "16in, gold-fill, $224",
-    alt: "Tender necklace on plain warm paper, shot directly from above",
+    price: "$224",
+    alt: "One freshwater pearl set off-centre on a gold-fill chain, photographed flat.",
     comment: "Tender: on plain warm paper, directly from above",
   },
   {
+    slug: "leeward",
     name: "Leeward",
     description: "Two chains at different lengths, one warm and one dark.",
-    meta: "16in + 18in, $268",
-    alt: "Leeward necklace on plain warm paper, shot directly from above",
+    price: "$268",
+    alt: "Two necklaces at different lengths, one warm gold-fill and one dark oxidised sterling, photographed flat.",
     comment: "Leeward: on plain warm paper, directly from above",
   },
   {
+    slug: "ballast",
     name: "Ballast",
     description: "Heavy oval links, soldered closed one at a time.",
-    meta: "18in, gold-fill, $310",
-    alt: "Ballast necklace on plain warm paper, shot directly from above",
+    price: "$310",
+    alt: "Heavy oval links in gold-fill, soldered closed one at a time, photographed flat.",
     comment: "Ballast: on plain warm paper, directly from above",
   },
 ];
 ---
 
-<section id="collection" class="section-y bg-base-200" aria-labelledby="collection-heading">
-  <div class="container-halden">
+<section id="collection" class="bg-base-100" aria-labelledby="collection-heading">
+  <div class="container-halden section-seam section-y">
     <div class="section-header">
       <p class="text-eyebrow">The collection</p>
-      <h2 id="collection-heading" class="text-headline">
+      <h2 id="collection-heading" class="text-headline-sm">
         Six pieces. That's the whole line.
       </h2>
       <p class="text-subhead">
@@ -59,18 +65,25 @@ const products = [
         sixty.
       </p>
     </div>
-    <div class="section-content grid grid-cols-1 gap-32 md:grid-cols-3">
+    <div
+      class="section-content grid grid-cols-1 gap-x-48 gap-y-96 md:grid-cols-3"
+    >
       {
         products.map((product) => (
-          <article class="card-alt flex flex-col gap-16">
-            <ImageSlot
-              ratio="4/5"
+          <article class="flex flex-col gap-16">
+            <HaldenImage
+              base={`/images/${product.slug}`}
               alt={product.alt}
+              width={800}
+              height={1000}
               comment={product.comment}
             />
-            <h3 class="text-display-20">{product.name}</h3>
-            <p class="text-body max-w-none">{product.description}</p>
-            <p class="text-meta">{product.meta}</p>
+            <div class="product-title-row">
+              <span class="product-title-row__name">{product.name}</span>
+              <span class="product-title-row__hairline" aria-hidden="true" />
+              <span class="product-title-row__price">{product.price}</span>
+            </div>
+            <p class="text-product-description max-w-none">{product.description}</p>
           </article>
         ))
       }
