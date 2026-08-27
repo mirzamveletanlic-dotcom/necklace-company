@@ -1,0 +1,20 @@
+---
+description: Landing page design, copy, and component rules for client builds
+alwaysApply: true
+---
+
+# Landing Page Rulebook
+
+Before making any design, layout, copy, or component decision on this project, read and follow **`rules.md`** in the project root (Landing Page Rulebook v2).
+
+Key constraints to hold in memory:
+
+- Modern and sophisticated — generous whitespace, restricted palette, one accent on actions only, consistent photography, max three type sizes
+- Branch on buyer (consumer / local service / enterprise) and want vs need before choosing structure
+- Use daisyUI role names (`bg-base-100`, `btn-primary`) — never hard-code colors
+- Spacing scale only: 8, 16, 24, 32, 48, 64, 96, 128
+- Images: Unsplash, Pexels, or client-supplied only — no AI-generated photography
+- Components must be MIT or work-for-hire — no ThemeForest/Framer extraction
+- Never publish without human approval
+
+For full section order, component specs, industry notes, and copy rules, consult `rules.md`.

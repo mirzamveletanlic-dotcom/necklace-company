@@ -1,0 +1,37 @@
+---
+import ImageSlot from "./ImageSlot.astro";
+---
+
+<section class="section-y bg-base-100" aria-labelledby="hero-heading">
+  <div class="container-halden">
+    <div class="grid grid-cols-1 gap-32 md:grid-cols-2 md:items-start">
+      <div class="max-w-prose">
+        <div class="section-header">
+          <p class="text-eyebrow">Made in Toronto, one at a time</p>
+          <h1 id="hero-heading" class="text-headline">
+            Necklaces you'll wear until they're yours.
+          </h1>
+          <p class="text-subhead">
+            Small-batch chains and pendants, hand-forged in a Leslieville studio
+            from recycled gold-fill and sterling. Made to order, made to last.
+          </p>
+        </div>
+        <div
+          class="mt-48 flex w-full flex-col gap-16 md:mt-64 md:w-auto md:flex-row"
+        >
+          <a href="#collection" class="btn btn-primary btn-link w-full md:w-auto">
+            Shop the collection
+          </a>
+          <a href="#process" class="btn btn-secondary btn-link w-full md:w-auto">
+            How they're made
+          </a>
+        </div>
+      </div>
+      <ImageSlot
+        ratio="4/5"
+        alt="Halden necklace worn at the collarbone in natural light"
+        comment="Hero: necklace worn at the collarbone in natural light"
+      />
+    </div>
+  </div>
+</section>

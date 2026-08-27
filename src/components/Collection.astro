@@ -1,0 +1,79 @@
+---
+import ImageSlot from "./ImageSlot.astro";
+
+const products = [
+  {
+    name: "Bight",
+    description: "A single loop of wire, forged flat where it crosses.",
+    meta: "16in, gold-fill, $132",
+    alt: "Bight necklace on plain warm paper, shot directly from above",
+    comment: "Bight: on plain warm paper, directly from above",
+  },
+  {
+    name: "Lakeshore",
+    description: "The thinnest chain we make that still takes daily wear.",
+    meta: "16in, gold-fill, $148",
+    alt: "Lakeshore necklace on plain warm paper, shot directly from above",
+    comment: "Lakeshore: on plain warm paper, directly from above",
+  },
+  {
+    name: "Keel",
+    description: "A forged bar, oxidised dark and left slightly uneven.",
+    meta: "18in, oxidised sterling, $186",
+    alt: "Keel necklace on plain warm paper, shot directly from above",
+    comment: "Keel: on plain warm paper, directly from above",
+  },
+  {
+    name: "Tender",
+    description: "One pearl, drilled and set by hand, off-centre on purpose.",
+    meta: "16in, gold-fill, $224",
+    alt: "Tender necklace on plain warm paper, shot directly from above",
+    comment: "Tender: on plain warm paper, directly from above",
+  },
+  {
+    name: "Leeward",
+    description: "Two chains at different lengths, one warm and one dark.",
+    meta: "16in + 18in, $268",
+    alt: "Leeward necklace on plain warm paper, shot directly from above",
+    comment: "Leeward: on plain warm paper, directly from above",
+  },
+  {
+    name: "Ballast",
+    description: "Heavy oval links, soldered closed one at a time.",
+    meta: "18in, gold-fill, $310",
+    alt: "Ballast necklace on plain warm paper, shot directly from above",
+    comment: "Ballast: on plain warm paper, directly from above",
+  },
+];
+---
+
+<section id="collection" class="section-y bg-base-200" aria-labelledby="collection-heading">
+  <div class="container-halden">
+    <div class="section-header">
+      <p class="text-eyebrow">The collection</p>
+      <h2 id="collection-heading" class="text-headline">
+        Six pieces. That's the whole line.
+      </h2>
+      <p class="text-subhead">
+        Each one is made after you order it, which is why there are six and not
+        sixty.
+      </p>
+    </div>
+    <div class="section-content grid grid-cols-1 gap-32 md:grid-cols-3">
+      {
+        products.map((product) => (
+          <article class="card-alt flex flex-col gap-16">
+            <ImageSlot
+              ratio="4/5"
+              alt={product.alt}
+              comment={product.comment}
+            />
+            <h3 class="text-display-20">{product.name}</h3>
+            <p class="text-body max-w-none">{product.description}</p>
+            <p class="text-meta">{product.meta}</p>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>

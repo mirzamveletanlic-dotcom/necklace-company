@@ -1,0 +1,46 @@
+---
+const items = [
+  {
+    question: "How long until it ships?",
+    answer:
+      "Seven to ten business days. Everything is made after you order it.",
+  },
+  {
+    question: "Will gold-fill turn my skin green?",
+    answer:
+      "No. That happens with plating and with brass. Gold-fill is a bonded 14k layer and there is no nickel in it.",
+  },
+  {
+    question: "Can I get a different length?",
+    answer:
+      "Yes. Add a note at checkout, or ask for a free resize within 60 days.",
+  },
+  {
+    question: "Do you ship outside Canada?",
+    answer: "Canada and the US. Free shipping in Canada over $150.",
+  },
+  {
+    question: "Can I see something in person first?",
+    answer:
+      "The studio is open by appointment on Thursdays. Email to book.",
+  },
+];
+---
+
+<section id="faq" class="section-y bg-base-100" aria-labelledby="faq-heading">
+  <div class="container-halden">
+    <div class="section-header">
+      <h2 id="faq-heading" class="text-headline">Questions.</h2>
+    </div>
+    <div class="section-content">
+      {
+        items.map((item) => (
+          <details class="faq-item">
+            <summary class="text-question">{item.question}</summary>
+            <p class="faq-answer text-body max-w-none">{item.answer}</p>
+          </details>
+        ))
+      }
+    </div>
+  </div>
+</section>
