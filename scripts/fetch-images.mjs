@@ -44,15 +44,16 @@ loadEnv();
 
 const apiKey = process.env.PEXELS_API_KEY;
 
-/** @type {Array<{ slot: string; query: string; file: string; width: number; height: number; orientation: "portrait" | "landscape" }>} */
+/** @type {Array<{ slot: string; query: string; file: string; width: number; height: number; orientation: "portrait" | "landscape"; cropPosition?: string }>} */
 const slots = [
   {
     slot: "hero",
-    query: "gold necklace on neutral background",
+    query: "gold necklace minimal negative space top",
     file: "hero",
-    width: 1000,
-    height: 1250,
-    orientation: "portrait",
+    width: 2400,
+    height: 1400,
+    orientation: "landscape",
+    cropPosition: "bottom",
   },
   {
     slot: "bight",
@@ -96,11 +97,19 @@ const slots = [
   },
   {
     slot: "ballast",
-    query: "chunky gold chain necklace",
+    query: "chunky gold chain necklace flat lay",
     file: "ballast",
     width: 800,
     height: 1000,
     orientation: "portrait",
+  },
+  {
+    slot: "display",
+    query: "jewellery workbench tools hands",
+    file: "display",
+    width: 2400,
+    height: 1350,
+    orientation: "landscape",
   },
   {
     slot: "studio",
@@ -110,16 +119,32 @@ const slots = [
     height: 1000,
     orientation: "landscape",
   },
+  {
+    slot: "materials",
+    query: "gold chain sterling wire jewellery materials",
+    file: "materials",
+    width: 1500,
+    height: 1000,
+    orientation: "landscape",
+  },
+  {
+    slot: "newsletter",
+    query: "gold jewellery flat lay work surface",
+    file: "newsletter",
+    width: 2400,
+    height: 1400,
+    orientation: "landscape",
+  },
 ];
 
-/** Curated Pexels + Pixabay fallbacks when no API key is set. */
+/** Curated Pexels fallbacks when no API key is set. */
 const fallbackBySlot = {
   hero: {
     source: "Pexels",
     downloadUrl:
-      "https://images.pexels.com/photos/10068128/pexels-photo-10068128.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=2000",
-    photographer: "Ron Lach",
-    url: "https://www.pexels.com/photo/woman-fixing-her-necklace-looking-at-camera-10068128/",
+      "https://images.pexels.com/photos/9634289/pexels-photo-9634289.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=2400",
+    photographer: "Nati",
+    url: "https://www.pexels.com/photo/gold-chain-necklace-on-brown-wooden-table-9634289/",
   },
   bight: {
     source: "Pexels",
@@ -159,9 +184,16 @@ const fallbackBySlot = {
   ballast: {
     source: "Pexels",
     downloadUrl:
-      "https://images.pexels.com/photos/1454168/pexels-photo-1454168.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=2000",
-    photographer: "Jose Ricardo Barraza Morachis",
-    url: "https://www.pexels.com/photo/woman-wearing-gold-chain-bib-necklace-1454168/",
+      "https://images.pexels.com/photos/9634289/pexels-photo-9634289.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=2000",
+    photographer: "Nati",
+    url: "https://www.pexels.com/photo/gold-chain-necklace-on-brown-wooden-table-9634289/",
+  },
+  display: {
+    source: "Pexels",
+    downloadUrl:
+      "https://images.pexels.com/photos/4354587/pexels-photo-4354587.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=2400",
+    photographer: "Maksim Goncharenok",
+    url: "https://www.pexels.com/photo/hands-of-a-person-holding-a-round-object-and-a-silver-tool-4354587/",
   },
   studio: {
     source: "Pexels",
@@ -169,6 +201,20 @@ const fallbackBySlot = {
       "https://images.pexels.com/photos/4354587/pexels-photo-4354587.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=2000",
     photographer: "Maksim Goncharenok",
     url: "https://www.pexels.com/photo/hands-of-a-person-holding-a-round-object-and-a-silver-tool-4354587/",
+  },
+  materials: {
+    source: "Pexels",
+    downloadUrl:
+      "https://images.pexels.com/photos/29502496/pexels-photo-29502496.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=2000",
+    photographer: "Yusuf Çelik",
+    url: "https://www.pexels.com/photo/elegant-gold-jewelry-collection-in-flat-lay-29502496/",
+  },
+  newsletter: {
+    source: "Pexels",
+    downloadUrl:
+      "https://images.pexels.com/photos/29502496/pexels-photo-29502496.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=2400",
+    photographer: "Yusuf Çelik",
+    url: "https://www.pexels.com/photo/elegant-gold-jewelry-collection-in-flat-lay-29502496/",
   },
 };
 
@@ -242,7 +288,7 @@ async function processSlot(slot, jpgQuality) {
     width: slot.width,
     height: slot.height,
     fit: "cover",
-    position: "attention",
+    position: slot.cropPosition ?? "attention",
   });
 
   const jpgPath = join(imagesDir, `${slot.file}.jpg`);
@@ -282,7 +328,7 @@ async function main() {
   mkdirSync(imagesDir, { recursive: true });
 
   if (!apiKey) {
-    console.log("No PEXELS_API_KEY — using curated Pexels/Pixabay fallbacks.\n");
+    console.log("No PEXELS_API_KEY — using curated Pexels fallbacks.\n");
   }
 
   let jpgQuality = 82;
@@ -312,7 +358,7 @@ async function main() {
 
   const creditsMd = `# Image credits
 
-Placeholder photography for development only. Sources: [Pexels](https://www.pexels.com), [Pixabay](https://pixabay.com).
+Placeholder photography for development only. Source: [Pexels](https://www.pexels.com).
 
 | Slot | Source | Photographer | URL |
 | --- | --- | --- | --- |

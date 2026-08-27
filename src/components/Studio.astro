@@ -4,11 +4,11 @@ import HaldenImage from "./HaldenImage.astro";
 
 <section
   id="studio"
-  class="scroll-reveal bg-neutral text-neutral-content"
+  class="bleed-section bg-neutral text-neutral-content"
   aria-labelledby="studio-heading"
 >
-  <div class="container-halden section-seam section-y">
-    <div class="grid grid-cols-1 gap-32 md:grid-cols-2 md:items-start">
+  <div class="container-halden bleed-section__grid">
+    <div class="bleed-section__copy scroll-reveal">
       <div class="section-header">
         <p class="text-eyebrow">The studio</p>
         <h2 id="studio-heading" class="text-headline-sm">
@@ -26,6 +26,8 @@ import HaldenImage from "./HaldenImage.astro";
           </p>
         </div>
       </div>
+    </div>
+    <div class="bleed-section__media bleed-section__media--right bleed-right scroll-reveal">
       <HaldenImage
         base="/images/studio"
         alt="Bench tools, wire, and hands mid-work at a jewellery workbench."

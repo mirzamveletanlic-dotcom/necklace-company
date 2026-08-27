@@ -2,42 +2,42 @@
 import HaldenImage from "./HaldenImage.astro";
 ---
 
-<section class="bg-base-100 pt-96 pb-192" aria-labelledby="hero-heading">
-  <div class="container-halden">
-    <div class="grid grid-cols-1 gap-32 md:grid-cols-12 md:items-start">
-      <div class="max-w-prose md:col-span-6 scroll-reveal">
-        <p class="text-eyebrow mb-48">Made in Toronto, one at a time</p>
-        <div class="flex flex-col gap-16">
-          <h1 id="hero-heading" class="text-headline">
-            Necklaces you'll wear until they're yours.
-          </h1>
-          <p class="text-subhead">
-            Small-batch chains and pendants, hand-forged in a Leslieville studio
-            from recycled gold-fill and sterling. Made to order, made to last.
-          </p>
-        </div>
-        <div
-          class="mt-48 flex w-full flex-col gap-16 md:mt-64 md:w-auto md:flex-row"
-        >
-          <a href="#collection" class="btn btn-primary btn-link w-full md:w-auto">
-            Shop the collection
-          </a>
-          <a href="#process" class="btn btn-secondary btn-link w-full md:w-auto">
-            How they're made
-          </a>
-        </div>
-      </div>
-      <div class="hero-parallax scroll-reveal md:col-span-5 md:col-start-8">
-        <HaldenImage
-          base="/images/hero"
-          alt="A gold-fill necklace worn at the collarbone in natural light."
-          width={1000}
-          height={1250}
-          loading="eager"
-          fetchpriority="high"
-          comment="Hero: necklace worn at the collarbone in natural light"
-        />
-      </div>
+<section class="hero-fullbleed" aria-labelledby="hero-heading">
+  <div class="hero-fullbleed__media">
+    <HaldenImage
+      base="/images/hero"
+      alt="A gold-fill necklace worn at the collarbone in natural light."
+      width={2400}
+      height={1400}
+      loading="eager"
+      fetchpriority="high"
+      flush
+      cover
+      objectPosition="50% 35%"
+      comment="Hero: necklace worn at the collarbone in natural light"
+    />
+  </div>
+  <div class="hero-fullbleed__overlay" aria-hidden="true"></div>
+  <div class="hero-fullbleed__content container-halden">
+    <p class="text-eyebrow scroll-reveal">Made in Toronto, one at a time</p>
+    <div class="mt-16 flex flex-col gap-16">
+      <h1 id="hero-heading" class="text-headline scroll-reveal">
+        Necklaces you'll wear until they're yours.
+      </h1>
+      <p class="text-subhead hero-fullbleed__subhead scroll-reveal">
+        Small-batch chains and pendants, hand-forged in a Leslieville studio
+        from recycled gold-fill and sterling. Made to order, made to last.
+      </p>
+    </div>
+    <div
+      class="mt-48 flex w-full flex-col gap-16 md:mt-64 md:w-auto md:flex-row"
+    >
+      <a href="#collection" class="btn btn-primary btn-link scroll-reveal w-full md:w-auto">
+        Shop the collection
+      </a>
+      <a href="#process" class="btn btn-secondary btn-link scroll-reveal w-full md:w-auto">
+        How they're made
+      </a>
     </div>
   </div>
 </section>

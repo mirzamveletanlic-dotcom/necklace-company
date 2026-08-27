@@ -1,0 +1,23 @@
+---
+const stats = [
+  { value: "6", label: "pieces in the line" },
+  { value: "9", label: "hours per necklace" },
+  { value: "1", label: "person at the bench" },
+  { value: "2019", label: "making them since" },
+];
+---
+
+<section class="bg-base-100" aria-label="Studio facts">
+  <div class="container-halden section-seam section-y">
+    <div class="numbers-grid scroll-reveal">
+      {
+        stats.map((stat) => (
+          <div class="numbers-grid__item flex flex-col gap-16">
+            <p class="stat-number">{stat.value}</p>
+            <p class="stat-label">{stat.label}</p>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

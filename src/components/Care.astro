@@ -15,15 +15,15 @@ const items = [
 ];
 ---
 
-<section id="care" class="scroll-reveal bg-base-100" aria-labelledby="care-heading">
+<section id="care" class="bg-base-100" aria-labelledby="care-heading">
   <div class="container-halden section-seam section-y">
-    <div class="section-header">
+    <div class="section-header scroll-reveal">
       <p class="text-eyebrow">After you buy</p>
       <h2 id="care-heading" class="text-headline-sm">
         Free resizing, lifetime repairs.
       </h2>
     </div>
-    <div class="section-content grid grid-cols-1 gap-32 md:grid-cols-3">
+    <div class="section-content grid grid-cols-1 gap-32 md:grid-cols-3" data-reveal-group>
       {
         items.map((item) => (
           <article class="scroll-reveal card flex flex-col gap-16">

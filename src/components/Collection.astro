@@ -5,6 +5,7 @@ const products = [
   {
     slug: "bight",
     name: "Bight",
+    material: "Gold-fill",
     description: "A single loop of wire, forged flat where it crosses.",
     price: "$132",
     alt: "A thin gold-fill necklace with a single forged loop pendant, photographed flat.",
@@ -13,6 +14,7 @@ const products = [
   {
     slug: "lakeshore",
     name: "Lakeshore",
+    material: "Gold-fill",
     description: "The thinnest chain we make that still takes daily wear.",
     price: "$148",
     alt: "A delicate gold-fill chain necklace, the thinnest in the Halden line, photographed flat.",
@@ -21,6 +23,7 @@ const products = [
   {
     slug: "keel",
     name: "Keel",
+    material: "Oxidised sterling",
     description: "A forged bar, oxidised dark and left slightly uneven.",
     price: "$186",
     alt: "A forged bar pendant in oxidised sterling, left slightly uneven, photographed flat.",
@@ -29,6 +32,7 @@ const products = [
   {
     slug: "tender",
     name: "Tender",
+    material: "Freshwater pearl",
     description: "One pearl, drilled and set by hand, off-centre on purpose.",
     price: "$224",
     alt: "One freshwater pearl set off-centre on a gold-fill chain, photographed flat.",
@@ -37,6 +41,7 @@ const products = [
   {
     slug: "leeward",
     name: "Leeward",
+    material: "Gold-fill & sterling",
     description: "Two chains at different lengths, one warm and one dark.",
     price: "$268",
     alt: "Two necklaces at different lengths, one warm gold-fill and one dark oxidised sterling, photographed flat.",
@@ -45,6 +50,7 @@ const products = [
   {
     slug: "ballast",
     name: "Ballast",
+    material: "Gold-fill",
     description: "Heavy oval links, soldered closed one at a time.",
     price: "$310",
     alt: "Heavy oval links in gold-fill, soldered closed one at a time, photographed flat.",
@@ -53,9 +59,9 @@ const products = [
 ];
 ---
 
-<section id="collection" class="bg-base-100 scroll-reveal" aria-labelledby="collection-heading">
+<section id="collection" class="bg-base-100" aria-labelledby="collection-heading">
   <div class="container-halden section-seam section-y">
-    <div class="section-header">
+    <div class="section-header scroll-reveal">
       <p class="text-eyebrow">The collection</p>
       <h2 id="collection-heading" class="text-headline-sm">
         Six pieces. That's the whole line.
@@ -67,6 +73,7 @@ const products = [
     </div>
     <div
       class="section-content grid grid-cols-1 gap-x-48 gap-y-96 md:grid-cols-3"
+      data-reveal-group
     >
       {
         products.map((product) => (
@@ -78,12 +85,14 @@ const products = [
               height={1000}
               comment={product.comment}
             />
-            <div class="product-title-row">
-              <span class="product-title-row__name">{product.name}</span>
-              <span class="product-title-row__hairline" aria-hidden="true" />
-              <span class="product-title-row__price">{product.price}</span>
+            <div class="flex flex-col gap-8">
+              <p class="text-material-line">{product.material}</p>
+              <div class="product-card__title-row">
+                <span class="product-card__name">{product.name}</span>
+                <span class="product-card__price">{product.price}</span>
+              </div>
+              <p class="product-card__description max-w-none">{product.description}</p>
             </div>
-            <p class="text-product-description max-w-none">{product.description}</p>
           </article>
         ))
       }

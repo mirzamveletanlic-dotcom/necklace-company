@@ -2,25 +2,33 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Header from "../components/Header.astro";
 import Hero from "../components/Hero.astro";
+import Marquee from "../components/Marquee.astro";
 import Collection from "../components/Collection.astro";
+import DisplayMoment from "../components/DisplayMoment.astro";
+import Numbers from "../components/Numbers.astro";
 import Process from "../components/Process.astro";
 import Studio from "../components/Studio.astro";
 import Materials from "../components/Materials.astro";
 import Care from "../components/Care.astro";
 import FAQ from "../components/FAQ.astro";
-import NewsletterFooter from "../components/NewsletterFooter.astro";
+import Newsletter from "../components/Newsletter.astro";
+import Footer from "../components/Footer.astro";
 ---
 
 <BaseLayout title="Halden | Handmade Necklaces, Made to Order">
   <Header />
   <main>
     <Hero />
+    <Marquee />
     <Collection />
+    <DisplayMoment />
+    <Numbers />
     <Process />
     <Studio />
     <Materials />
     <Care />
     <FAQ />
-    <NewsletterFooter />
+    <Newsletter />
   </main>
+  <Footer />
 </BaseLayout>

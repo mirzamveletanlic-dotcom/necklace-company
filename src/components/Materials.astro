@@ -1,13 +1,26 @@
-<section id="materials" class="scroll-reveal bg-base-100" aria-labelledby="materials-heading">
-  <div class="container-halden section-seam section-y">
-    <div class="section-header">
-      <p class="text-eyebrow">Materials</p>
-      <h2 id="materials-heading" class="text-headline-sm">
-        Gold-fill, not gold-plated.
-      </h2>
+---
+import HaldenImage from "./HaldenImage.astro";
+---
+
+<section id="materials" class="bleed-section bg-base-100" aria-labelledby="materials-heading">
+  <div class="container-halden bleed-section__grid">
+    <div class="bleed-section__media bleed-section__media--left bleed-left scroll-reveal">
+      <HaldenImage
+        base="/images/materials"
+        alt="Gold-fill chain and sterling wire photographed on a work surface."
+        width={1500}
+        height={1000}
+        comment="Materials: gold-fill chain and sterling wire"
+      />
     </div>
-    <div class="section-content">
-      <p class="text-body">
+    <div class="bleed-section__copy bleed-section__copy--right scroll-reveal">
+      <div class="section-header">
+        <p class="text-eyebrow">Materials</p>
+        <h2 id="materials-heading" class="text-headline-sm">
+          Gold-fill, not gold-plated.
+        </h2>
+      </div>
+      <p class="text-body mt-48 max-w-none md:mt-64">
         Plating is measured in microns and wears through in a year. Gold-fill is
         a bonded layer roughly a hundred times thicker, and it does not wear off.
         Everything else is .925 sterling, oxidised by hand. Freshwater pearls

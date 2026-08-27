@@ -23,28 +23,32 @@ const steps = [
 ];
 ---
 
-<section id="process" class="bg-base-100 scroll-reveal" aria-labelledby="process-heading">
+<section id="process" class="bg-base-100" aria-labelledby="process-heading">
   <div class="container-halden section-seam section-y">
-    <div class="section-header">
-      <p class="text-eyebrow">At the bench</p>
-      <h2 id="process-heading" class="text-headline-sm">
-        Four steps, about nine hours.
-      </h2>
-      <p class="text-subhead">
-        Nothing here is cast, stamped, or assembled from parts. The four steps
-        below are the whole process, start to finish.
-      </p>
-    </div>
-    <div class="section-content grid grid-cols-1 gap-32 md:grid-cols-4">
-      {
-        steps.map((step) => (
-          <div class="scroll-reveal flex flex-col">
-            <p class="process-number">{step.number}</p>
-            <h3 class="process-step-name mt-24">{step.name}</h3>
-            <p class="text-body mt-16 max-w-none">{step.line}</p>
-          </div>
-        ))
-      }
+    <div class="process-layout">
+      <div class="process-layout__header scroll-reveal">
+        <div class="section-header">
+          <p class="text-eyebrow">At the bench</p>
+          <h2 id="process-heading" class="text-headline-sm">
+            Four steps, about nine hours.
+          </h2>
+          <p class="text-subhead">
+            Nothing here is cast, stamped, or assembled from parts. The four steps
+            below are the whole process, start to finish.
+          </p>
+        </div>
+      </div>
+      <div class="process-layout__steps" data-reveal-group>
+        {
+          steps.map((step) => (
+            <div class="scroll-reveal flex flex-col">
+              <p class="process-number">{step.number}</p>
+              <h3 class="process-step-name mt-24">{step.name}</h3>
+              <p class="text-body mt-16 max-w-none">{step.line}</p>
+            </div>
+          ))
+        }
+      </div>
     </div>
   </div>
 </section>
