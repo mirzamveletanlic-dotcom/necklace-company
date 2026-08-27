@@ -15,7 +15,7 @@ const items = [
 ];
 ---
 
-<section id="care" class="bg-base-100" aria-labelledby="care-heading">
+<section id="care" class="scroll-reveal bg-base-100" aria-labelledby="care-heading">
   <div class="container-halden section-seam section-y">
     <div class="section-header">
       <p class="text-eyebrow">After you buy</p>
@@ -26,7 +26,7 @@ const items = [
     <div class="section-content grid grid-cols-1 gap-32 md:grid-cols-3">
       {
         items.map((item) => (
-          <article class="card flex flex-col gap-16">
+          <article class="scroll-reveal card flex flex-col gap-16">
             <h3 class="process-step-name">{item.title}</h3>
             <p class="text-body max-w-none">{item.line}</p>
           </article>

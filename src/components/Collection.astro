@@ -53,7 +53,7 @@ const products = [
 ];
 ---
 
-<section id="collection" class="bg-base-100" aria-labelledby="collection-heading">
+<section id="collection" class="bg-base-100 scroll-reveal" aria-labelledby="collection-heading">
   <div class="container-halden section-seam section-y">
     <div class="section-header">
       <p class="text-eyebrow">The collection</p>
@@ -70,7 +70,7 @@ const products = [
     >
       {
         products.map((product) => (
-          <article class="flex flex-col gap-16">
+          <article class="scroll-reveal flex flex-col gap-16">
             <HaldenImage
               base={`/images/${product.slug}`}
               alt={product.alt}

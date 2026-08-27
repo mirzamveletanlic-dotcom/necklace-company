@@ -23,7 +23,7 @@ const steps = [
 ];
 ---
 
-<section id="process" class="bg-base-100" aria-labelledby="process-heading">
+<section id="process" class="bg-base-100 scroll-reveal" aria-labelledby="process-heading">
   <div class="container-halden section-seam section-y">
     <div class="section-header">
       <p class="text-eyebrow">At the bench</p>
@@ -38,7 +38,7 @@ const steps = [
     <div class="section-content grid grid-cols-1 gap-32 md:grid-cols-4">
       {
         steps.map((step) => (
-          <div class="flex flex-col">
+          <div class="scroll-reveal flex flex-col">
             <p class="process-number">{step.number}</p>
             <h3 class="process-step-name mt-24">{step.name}</h3>
             <p class="text-body mt-16 max-w-none">{step.line}</p>

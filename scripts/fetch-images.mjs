@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 import {
-  mkdir,
+  mkdirSync,
   readFileSync,
   readdirSync,
   renameSync,
@@ -43,12 +43,6 @@ function loadEnv() {
 loadEnv();
 
 const apiKey = process.env.PEXELS_API_KEY;
-if (!apiKey) {
-  console.error(
-    "Missing PEXELS_API_KEY. Add it to .env in the project root and re-run.",
-  );
-  process.exit(1);
-}
 
 /** @type {Array<{ slot: string; query: string; file: string; width: number; height: number; orientation: "portrait" | "landscape" }>} */
 const slots = [
@@ -118,6 +112,66 @@ const slots = [
   },
 ];
 
+/** Curated Pexels + Pixabay fallbacks when no API key is set. */
+const fallbackBySlot = {
+  hero: {
+    source: "Pexels",
+    downloadUrl:
+      "https://images.pexels.com/photos/10068128/pexels-photo-10068128.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=2000",
+    photographer: "Ron Lach",
+    url: "https://www.pexels.com/photo/woman-fixing-her-necklace-looking-at-camera-10068128/",
+  },
+  bight: {
+    source: "Pexels",
+    downloadUrl:
+      "https://images.pexels.com/photos/9634289/pexels-photo-9634289.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=2000",
+    photographer: "Nati",
+    url: "https://www.pexels.com/photo/gold-chain-necklace-on-brown-wooden-table-9634289/",
+  },
+  lakeshore: {
+    source: "Pexels",
+    downloadUrl:
+      "https://images.pexels.com/photos/32793758/pexels-photo-32793758.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=2000",
+    photographer: "NUDE Nahum",
+    url: "https://www.pexels.com/photo/elegant-jewelry-and-perfume-flat-lay-on-satin-32793758/",
+  },
+  keel: {
+    source: "Pexels",
+    downloadUrl:
+      "https://images.pexels.com/photos/1191531/pexels-photo-1191531.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=2000",
+    photographer: "Burst",
+    url: "https://www.pexels.com/photo/silver-necklace-on-white-surface-1191531/",
+  },
+  tender: {
+    source: "Pexels",
+    downloadUrl:
+      "https://images.pexels.com/photos/4532678/pexels-photo-4532678.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=2000",
+    photographer: "Svetlana B",
+    url: "https://www.pexels.com/photo/a-close-up-shot-of-a-pearl-necklace-4532678/",
+  },
+  leeward: {
+    source: "Pexels",
+    downloadUrl:
+      "https://images.pexels.com/photos/29502496/pexels-photo-29502496.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=2000",
+    photographer: "Yusuf Çelik",
+    url: "https://www.pexels.com/photo/elegant-gold-jewelry-collection-in-flat-lay-29502496/",
+  },
+  ballast: {
+    source: "Pexels",
+    downloadUrl:
+      "https://images.pexels.com/photos/1454168/pexels-photo-1454168.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=2000",
+    photographer: "Jose Ricardo Barraza Morachis",
+    url: "https://www.pexels.com/photo/woman-wearing-gold-chain-bib-necklace-1454168/",
+  },
+  studio: {
+    source: "Pexels",
+    downloadUrl:
+      "https://images.pexels.com/photos/4354587/pexels-photo-4354587.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=2000",
+    photographer: "Maksim Goncharenok",
+    url: "https://www.pexels.com/photo/hands-of-a-person-holding-a-round-object-and-a-silver-tool-4354587/",
+  },
+};
+
 async function searchPexels(query, orientation) {
   const params = new URLSearchParams({
     query,
@@ -141,11 +195,38 @@ async function searchPexels(query, orientation) {
   if (!photo?.src?.large2x) {
     throw new Error(`No Pexels results for "${query}"`);
   }
-  return photo;
+  return {
+    source: "Pexels",
+    downloadUrl: photo.src.large2x,
+    photographer: photo.photographer,
+    url: photo.url,
+  };
+}
+
+async function resolveSource(slot) {
+  if (apiKey) {
+    try {
+      return await searchPexels(slot.query, slot.orientation);
+    } catch (error) {
+      console.warn(`  API search failed for ${slot.slot}, using fallback:`, error.message);
+    }
+  }
+
+  const fallback = fallbackBySlot[slot.slot];
+  if (!fallback) {
+    throw new Error(`No fallback configured for slot "${slot.slot}"`);
+  }
+  return fallback;
 }
 
 async function downloadBuffer(url) {
-  const response = await fetch(url);
+  const response = await fetch(url, {
+    headers: {
+      "User-Agent":
+        "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
+      Accept: "image/avif,image/webp,image/apng,image/*,*/*;q=0.8",
+    },
+  });
   if (!response.ok) {
     throw new Error(`Download failed: ${response.status} ${response.statusText}`);
   }
@@ -154,10 +235,10 @@ async function downloadBuffer(url) {
 
 async function processSlot(slot, jpgQuality) {
   console.log(`Fetching ${slot.slot}: "${slot.query}"…`);
-  const photo = await searchPexels(slot.query, slot.orientation);
-  const source = await downloadBuffer(photo.src.large2x);
+  const source = await resolveSource(slot);
+  const buffer = await downloadBuffer(source.downloadUrl);
 
-  const processed = sharp(source).resize({
+  const processed = sharp(buffer).resize({
     width: slot.width,
     height: slot.height,
     fit: "cover",
@@ -170,12 +251,13 @@ async function processSlot(slot, jpgQuality) {
   await processed.clone().jpeg({ quality: jpgQuality, mozjpeg: true }).toFile(jpgPath);
   await processed.clone().webp({ quality: 80 }).toFile(webpPath);
 
-  console.log(`  → ${slot.file}.jpg, ${slot.file}.webp`);
+  console.log(`  → ${slot.file}.jpg, ${slot.file}.webp (${source.source})`);
 
   return {
     slot: slot.slot,
-    photographer: photo.photographer,
-    url: photo.url,
+    source: source.source,
+    photographer: source.photographer,
+    url: source.url,
     file: slot.file,
   };
 }
@@ -197,10 +279,14 @@ function totalImageBytes() {
 }
 
 async function main() {
-  mkdir(imagesDir, { recursive: true });
+  mkdirSync(imagesDir, { recursive: true });
+
+  if (!apiKey) {
+    console.log("No PEXELS_API_KEY — using curated Pexels/Pixabay fallbacks.\n");
+  }
 
   let jpgQuality = 82;
-  let credits = [];
+  const credits = [];
 
   for (const slot of slots) {
     credits.push(await processSlot(slot, jpgQuality));
@@ -226,14 +312,14 @@ async function main() {
 
   const creditsMd = `# Image credits
 
-Placeholder photography for development only. Source: [Pexels](https://www.pexels.com).
+Placeholder photography for development only. Sources: [Pexels](https://www.pexels.com), [Pixabay](https://pixabay.com).
 
-| Slot | Photographer | Pexels URL |
-| --- | --- | --- |
+| Slot | Source | Photographer | URL |
+| --- | --- | --- | --- |
 ${credits
   .map(
     (entry) =>
-      `| ${entry.slot} | ${entry.photographer} | ${entry.url} |`,
+      `| ${entry.slot} | ${entry.source} | ${entry.photographer} | ${entry.url} |`,
   )
   .join("\n")}
 `;
