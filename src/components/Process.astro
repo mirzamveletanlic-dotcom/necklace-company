@@ -1,4 +1,6 @@
 ---
+import BadgePill from "./BadgePill.astro";
+
 const steps = [
   {
     number: "01",
@@ -28,11 +30,11 @@ const steps = [
     <div class="process-layout">
       <div class="process-layout__header scroll-reveal">
         <div class="section-header">
-          <p class="text-eyebrow">At the bench</p>
+          <BadgePill label="At the bench" />
           <h2 id="process-heading" class="text-headline-sm">
             Four steps, about nine hours.
           </h2>
-          <p class="text-subhead">
+          <p class="text-subhead text-subhead--muted">
             Nothing here is cast, stamped, or assembled from parts. The four steps
             below are the whole process, start to finish.
           </p>
@@ -41,11 +43,11 @@ const steps = [
       <div class="process-layout__steps" data-reveal-group>
         {
           steps.map((step) => (
-            <div class="scroll-reveal flex flex-col">
-              <p class="process-number">{step.number}</p>
-              <h3 class="process-step-name mt-24">{step.name}</h3>
-              <p class="text-body mt-16 max-w-none">{step.line}</p>
-            </div>
+            <article class="scroll-reveal feature-card">
+              <span class="feature-card__badge">{step.number}</span>
+              <h3 class="feature-card__title">{step.name}</h3>
+              <p class="feature-card__line">{step.line}</p>
+            </article>
           ))
         }
       </div>

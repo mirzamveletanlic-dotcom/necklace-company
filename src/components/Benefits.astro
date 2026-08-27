@@ -1,0 +1,35 @@
+---
+const items = [
+  {
+    title: "Made to order",
+    line: "Seven to ten business days. Everything is made after you order it.",
+  },
+  {
+    title: "Free resizing",
+    line: "Free within 60 days, any length, no questions.",
+  },
+  {
+    title: "Lifetime repairs",
+    line: "Lifetime, on anything we made. You pay shipping one way.",
+  },
+  {
+    title: "Studio visits",
+    line: "The studio is open by appointment on Thursdays. Email to book.",
+  },
+];
+---
+
+<section class="benefits-band surface-grid" aria-label="Purchase benefits">
+  <div class="container-halden">
+    <div class="benefits-grid scroll-reveal" data-reveal-group>
+      {
+        items.map((item) => (
+          <article class="benefit-card scroll-reveal">
+            <h3 class="benefit-card__title">{item.title}</h3>
+            <p class="benefit-card__line">{item.line}</p>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>

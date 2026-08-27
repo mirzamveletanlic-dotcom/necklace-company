@@ -1,0 +1,10 @@
+---
+interface Props {
+  label: string;
+  light?: boolean;
+}
+
+const { label, light = false } = Astro.props;
+---
+
+<p class:list={["badge-pill", light && "badge-pill--light"]}>{label}</p>

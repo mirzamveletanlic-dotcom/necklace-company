@@ -1,14 +1,19 @@
 ---
+import BadgePill from "./BadgePill.astro";
+
 const items = [
   {
+    icon: "↔",
     title: "Resizing",
     line: "Free within 60 days, any length, no questions.",
   },
   {
+    icon: "✦",
     title: "Repairs",
     line: "Lifetime, on anything we made. You pay shipping one way.",
   },
   {
+    icon: "◦",
     title: "Care",
     line: "Store flat and dry. Take it off before the pool, not the shower.",
   },
@@ -17,8 +22,8 @@ const items = [
 
 <section id="care" class="bg-base-100" aria-labelledby="care-heading">
   <div class="container-halden section-seam section-y">
-    <div class="section-header scroll-reveal">
-      <p class="text-eyebrow">After you buy</p>
+    <div class="section-header section-header--center scroll-reveal">
+      <BadgePill label="After you buy" />
       <h2 id="care-heading" class="text-headline-sm">
         Free resizing, lifetime repairs.
       </h2>
@@ -26,9 +31,10 @@ const items = [
     <div class="section-content grid grid-cols-1 gap-32 md:grid-cols-3" data-reveal-group>
       {
         items.map((item) => (
-          <article class="scroll-reveal card flex flex-col gap-16">
-            <h3 class="process-step-name">{item.title}</h3>
-            <p class="text-body max-w-none">{item.line}</p>
+          <article class="scroll-reveal feature-card">
+            <span class="feature-card__icon" aria-hidden="true">{item.icon}</span>
+            <h3 class="feature-card__title">{item.title}</h3>
+            <p class="feature-card__line">{item.line}</p>
           </article>
         ))
       }

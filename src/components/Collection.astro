@@ -1,5 +1,6 @@
 ---
 import HaldenImage from "./HaldenImage.astro";
+import BadgePill from "./BadgePill.astro";
 
 const products = [
   {
@@ -59,43 +60,45 @@ const products = [
 ];
 ---
 
-<section id="collection" class="bg-base-100" aria-labelledby="collection-heading">
-  <div class="container-halden section-seam section-y">
-    <div class="section-header section-header--center scroll-reveal">
-      <p class="text-eyebrow">The collection</p>
-      <h2 id="collection-heading" class="text-headline-sm">
-        Six pieces. That's the whole line.
-      </h2>
-      <p class="text-subhead">
-        Each one is made after you order it, which is why there are six and not
-        sixty.
-      </p>
-    </div>
-    <div
-      class="section-content grid grid-cols-1 gap-x-48 gap-y-96 md:grid-cols-3"
-      data-reveal-group
-    >
-      {
-        products.map((product) => (
-          <article class="scroll-reveal flex flex-col gap-16">
-            <HaldenImage
-              base={`/images/${product.slug}`}
-              alt={product.alt}
-              width={800}
-              height={1000}
-              comment={product.comment}
-            />
-            <div class="flex flex-col gap-8">
-              <p class="text-material-line">{product.material}</p>
-              <div class="product-card__title-row">
-                <span class="product-card__name">{product.name}</span>
-                <span class="product-card__price">{product.price}</span>
+<section id="collection" class="collection-overlap" aria-labelledby="collection-heading">
+  <div class="collection-overlap__panel">
+    <div class="container-halden section-y collection-overlap__inner">
+      <div class="section-header section-header--center scroll-reveal">
+        <BadgePill label="The collection" />
+        <h2 id="collection-heading" class="text-headline-sm">
+          Six pieces. That's the whole line.
+        </h2>
+        <p class="text-subhead text-subhead--muted section-header__subhead">
+          Each one is made after you order it, which is why there are six and not
+          sixty.
+        </p>
+      </div>
+      <div class="section-content collection-scroll" data-reveal-group>
+        {
+          products.map((product) => (
+            <a
+              href="#collection"
+              class="scroll-reveal product-card product-card--interactive"
+            >
+              <HaldenImage
+                base={`/images/${product.slug}`}
+                alt={product.alt}
+                width={800}
+                height={1000}
+                comment={product.comment}
+              />
+              <div class="product-card__meta">
+                <p class="text-material-line">{product.material}</p>
+                <div class="product-card__title-row">
+                  <span class="product-card__name">{product.name}</span>
+                  <span class="product-card__price">{product.price}</span>
+                </div>
+                <p class="product-card__description max-w-none">{product.description}</p>
               </div>
-              <p class="product-card__description max-w-none">{product.description}</p>
-            </div>
-          </article>
-        ))
-      }
+            </a>
+          ))
+        }
+      </div>
     </div>
   </div>
 </section>

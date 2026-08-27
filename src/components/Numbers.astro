@@ -7,17 +7,19 @@ const stats = [
 ];
 ---
 
-<section class="bg-base-100" aria-label="Studio facts">
+<section class="numbers-band-wrap" aria-label="Studio facts">
   <div class="container-halden section-seam section-y">
-    <div class="numbers-grid scroll-reveal">
-      {
-        stats.map((stat) => (
-          <div class="numbers-grid__item flex flex-col gap-16">
-            <p class="stat-number">{stat.value}</p>
-            <p class="stat-label">{stat.label}</p>
-          </div>
-        ))
-      }
+    <div class="numbers-band scroll-reveal">
+      <div class="numbers-grid">
+        {
+          stats.map((stat) => (
+            <div class="numbers-grid__item flex flex-col gap-16">
+              <p class="stat-number">{stat.value}</p>
+              <p class="stat-label">{stat.label}</p>
+            </div>
+          ))
+        }
+      </div>
     </div>
   </div>
 </section>

@@ -4,8 +4,9 @@
       <a href="/" class="wordmark site-header__brand text-link-plain no-underline">
         Halden
       </a>
-      <nav aria-label="Main">
-        <ul class="flex flex-wrap gap-24 md:gap-32">
+
+      <nav class="site-header__nav" aria-label="Main">
+        <ul class="site-header__links">
           <li>
             <a href="#collection" class="site-header__link text-link-plain">Collection</a>
           </li>
@@ -17,6 +18,31 @@
           </li>
         </ul>
       </nav>
+
+      <button
+        type="button"
+        class="site-header__menu"
+        data-nav-toggle
+        aria-expanded="false"
+        aria-controls="mobile-nav"
+        aria-label="Open menu"
+      >
+        <span class="site-header__menu-line" aria-hidden="true"></span>
+        <span class="site-header__menu-line" aria-hidden="true"></span>
+      </button>
     </div>
+  </div>
+
+  <div class="mobile-nav" id="mobile-nav" data-mobile-nav hidden>
+    <div class="mobile-nav__backdrop" data-nav-close aria-hidden="true"></div>
+    <nav class="mobile-nav__panel" aria-label="Mobile">
+      <ul class="mobile-nav__links">
+        <li><a href="#collection" class="mobile-nav__link" data-nav-close>Collection</a></li>
+        <li><a href="#process" class="mobile-nav__link" data-nav-close>Process</a></li>
+        <li><a href="#studio" class="mobile-nav__link" data-nav-close>Studio</a></li>
+        <li><a href="#faq" class="mobile-nav__link" data-nav-close>Questions</a></li>
+        <li><a href="#newsletter" class="mobile-nav__link" data-nav-close>Newsletter</a></li>
+      </ul>
+    </nav>
   </div>
 </header>

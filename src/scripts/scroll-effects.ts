@@ -11,6 +11,8 @@ export function initScrollEffects() {
       element.classList.add("is-visible");
     });
     initHeaderScroll();
+    initHeroSlider(true);
+    initMobileNav();
     return;
   }
 
@@ -18,6 +20,8 @@ export function initScrollEffects() {
   initRevealGroups();
   initRevealElements();
   initHeaderScroll();
+  initHeroSlider(false);
+  initMobileNav();
 }
 
 function initHeroLoadAnimation() {
@@ -29,6 +33,9 @@ function initHeroLoadAnimation() {
 
   if (h1) {
     h1.classList.add("is-visible");
+    h1.querySelectorAll(".text-headline__line").forEach((line, index) => {
+      line.style.setProperty("--reveal-delay", `${index * STAGGER_MS}ms`);
+    });
   }
 
   rest.forEach((element, index) => {
@@ -84,6 +91,72 @@ function initHeaderScroll() {
   updateHeader();
   window.addEventListener("scroll", updateHeader, { passive: true });
   window.addEventListener("resize", updateHeader, { passive: true });
+}
+
+function initHeroSlider(reducedMotion: boolean) {
+  const slider = document.querySelector("[data-hero-slider]");
+  const slides = slider?.querySelectorAll("[data-hero-slide]");
+  const counter = document.querySelector("[data-hero-counter]");
+  const prevButton = document.querySelector("[data-hero-prev]");
+  const nextButton = document.querySelector("[data-hero-next]");
+
+  if (!slider || !slides?.length || !counter) return;
+
+  let activeIndex = 0;
+  const total = slides.length;
+
+  const formatCounter = (index: number) => {
+    const current = String(index + 1).padStart(2, "0");
+    const max = String(total).padStart(2, "0");
+    return `${current}/${max}`;
+  };
+
+  const setSlide = (index: number) => {
+    activeIndex = (index + total) % total;
+    slides.forEach((slide, slideIndex) => {
+      slide.classList.toggle("is-active", slideIndex === activeIndex);
+    });
+    counter.textContent = formatCounter(activeIndex);
+  };
+
+  prevButton?.addEventListener("click", () => setSlide(activeIndex - 1));
+  nextButton?.addEventListener("click", () => setSlide(activeIndex + 1));
+
+  setSlide(0);
+
+  if (reducedMotion) return;
+
+  window.setInterval(() => {
+    setSlide(activeIndex + 1);
+  }, 6000);
+}
+
+function initMobileNav() {
+  const toggle = document.querySelector("[data-nav-toggle]");
+  const nav = document.querySelector("[data-mobile-nav]");
+  if (!toggle || !nav) return;
+
+  const closeTriggers = nav.querySelectorAll("[data-nav-close]");
+
+  const setOpen = (open: boolean) => {
+    toggle.setAttribute("aria-expanded", String(open));
+    toggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+    nav.toggleAttribute("hidden", !open);
+    document.body.classList.toggle("nav-open", open);
+  };
+
+  toggle.addEventListener("click", () => {
+    const isOpen = toggle.getAttribute("aria-expanded") === "true";
+    setOpen(!isOpen);
+  });
+
+  closeTriggers.forEach((trigger) => {
+    trigger.addEventListener("click", () => setOpen(false));
+  });
+
+  window.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") setOpen(false);
+  });
 }
 
 initScrollEffects();

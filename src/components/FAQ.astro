@@ -27,23 +27,36 @@ const items = [
 ];
 ---
 
-<section id="faq" class="bg-base-100" aria-labelledby="faq-heading">
+<section id="faq" class="bg-base-100 surface-grid" aria-labelledby="faq-heading">
   <div class="container-halden section-seam section-y">
     <div class="section-header section-header--center scroll-reveal">
       <h2 id="faq-heading" class="text-headline-sm">Questions.</h2>
-      <p class="text-subhead section-header__subhead">
+      <p class="text-subhead text-subhead--muted section-header__subhead">
         Straight answers about ordering, materials, and the studio.
       </p>
     </div>
-    <div class="section-content">
-      {
-        items.map((item) => (
-          <details class="faq-item">
-            <summary class="text-faq-question">{item.question}</summary>
-            <p class="faq-answer text-body max-w-none">{item.answer}</p>
-          </details>
-        ))
-      }
+    <div class="section-content faq-layout">
+      <div class="faq-list">
+        {
+          items.map((item) => (
+            <details class="faq-item">
+              <summary class="text-faq-question">{item.question}</summary>
+              <p class="faq-answer text-body max-w-none">{item.answer}</p>
+            </details>
+          ))
+        }
+      </div>
+      <aside class="faq-cta scroll-reveal">
+        <h3 class="faq-cta__title">You have different questions?</h3>
+        <p class="faq-cta__line">
+          Email us and Nora will answer directly. We respond within one business
+          day.
+        </p>
+        <a href="mailto:hello@halden.co" class="btn btn-primary btn--arrow btn-link">
+          <span>hello@halden.co</span>
+          <span class="btn__icon" aria-hidden="true">↗</span>
+        </a>
+      </aside>
     </div>
   </div>
 </section>

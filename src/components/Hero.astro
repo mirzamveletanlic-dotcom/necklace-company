@@ -1,42 +1,112 @@
 ---
 import HaldenImage from "./HaldenImage.astro";
+import BadgePill from "./BadgePill.astro";
+
+const slides = [
+  {
+    slug: "bight",
+    alt: "A thin gold-fill necklace with a single forged loop pendant, photographed flat.",
+    label: "Bight",
+  },
+  {
+    slug: "lakeshore",
+    alt: "A delicate gold-fill chain necklace, the thinnest in the Halden line, photographed flat.",
+    label: "Lakeshore",
+  },
+  {
+    slug: "keel",
+    alt: "A forged bar pendant in oxidised sterling, left slightly uneven, photographed flat.",
+    label: "Keel",
+  },
+  {
+    slug: "tender",
+    alt: "One freshwater pearl set off-centre on a gold-fill chain, photographed flat.",
+    label: "Tender",
+  },
+  {
+    slug: "leeward",
+    alt: "Two necklaces at different lengths, one warm gold-fill and one dark oxidised sterling, photographed flat.",
+    label: "Leeward",
+  },
+  {
+    slug: "ballast",
+    alt: "Heavy oval links in gold-fill, soldered closed one at a time, photographed flat.",
+    label: "Ballast",
+  },
+];
 ---
 
 <section class="hero-fullbleed" aria-labelledby="hero-heading">
-  <div class="hero-fullbleed__media">
-    <HaldenImage
-      base="/images/hero"
-      alt="A gold-fill necklace worn at the collarbone in natural light."
-      width={2400}
-      height={1400}
-      loading="eager"
-      fetchpriority="high"
-      cover
-      objectPosition="50% 35%"
-      comment="Hero: necklace worn at the collarbone in natural light"
-    />
+  <div class="hero-fullbleed__media hero-slider" data-hero-slider>
+    {
+      slides.map((slide, index) => (
+        <div
+          class:list={["hero-slider__slide", index === 0 && "is-active"]}
+          data-hero-slide
+          data-index={index}
+        >
+          <HaldenImage
+            base={`/images/${slide.slug}`}
+            alt={slide.alt}
+            width={2400}
+            height={1400}
+            loading={index === 0 ? "eager" : "lazy"}
+            fetchpriority={index === 0 ? "high" : undefined}
+            cover
+            objectPosition="50% 35%"
+            comment={`Hero slide: ${slide.label}`}
+          />
+        </div>
+      ))
+    }
   </div>
   <div class="hero-fullbleed__overlay" aria-hidden="true"></div>
-  <div class="hero-fullbleed__content container-halden">
-    <p class="text-eyebrow scroll-reveal">Made in Toronto, one at a time</p>
-    <div class="mt-16 flex flex-col gap-16">
-      <h1 id="hero-heading" class="text-headline scroll-reveal">
-        Necklaces you'll wear until they're yours.
-      </h1>
-      <p class="text-subhead hero-fullbleed__subhead scroll-reveal">
-        Small-batch chains and pendants, hand-forged in a Leslieville studio
-        from recycled gold-fill and sterling. Made to order, made to last.
-      </p>
-    </div>
-    <div
-      class="mt-48 flex w-full flex-col gap-16 md:mt-64 md:w-auto md:flex-row"
+
+  <div class="hero-slider__controls container-halden" data-hero-controls>
+    <button
+      type="button"
+      class="hero-slider__button"
+      data-hero-prev
+      aria-label="Previous photograph"
     >
-      <a href="#collection" class="btn btn-primary btn-link scroll-reveal w-full md:w-auto">
-        Shop the collection
-      </a>
-      <a href="#process" class="btn btn-secondary btn-link scroll-reveal w-full md:w-auto">
-        How they're made
-      </a>
+      ←
+    </button>
+    <p class="hero-slider__counter" data-hero-counter aria-live="polite">
+      01/06
+    </p>
+    <button
+      type="button"
+      class="hero-slider__button"
+      data-hero-next
+      aria-label="Next photograph"
+    >
+      →
+    </button>
+  </div>
+
+  <div class="hero-fullbleed__content container-halden">
+    <div class="hero-fullbleed__inner">
+      <BadgePill label="Made in Toronto, one at a time" light />
+      <div class="hero-fullbleed__copy">
+        <h1 id="hero-heading" class="text-headline text-headline--split scroll-reveal">
+          <span class="text-headline__line">Necklaces you'll wear</span>
+          <span class="text-headline__line">until they're yours.</span>
+        </h1>
+        <p class="text-subhead text-subhead--light hero-fullbleed__subhead scroll-reveal">
+          Small-batch chains and pendants, hand-forged in a Leslieville studio
+          from recycled gold-fill and sterling. Made to order, made to last.
+        </p>
+      </div>
+      <div class="hero-fullbleed__actions scroll-reveal">
+        <a href="#collection" class="btn btn-primary btn--arrow btn-link">
+          <span>Shop the collection</span>
+          <span class="btn__icon" aria-hidden="true">↗</span>
+        </a>
+        <a href="#process" class="btn btn-secondary btn--arrow btn-link btn--ghost">
+          <span>How they're made</span>
+          <span class="btn__icon" aria-hidden="true">↗</span>
+        </a>
+      </div>
     </div>
   </div>
 </section>
